@@ -8,8 +8,8 @@ namespace Work
 
         public s6(string a, string b)
         {
-            str1 = a;
-            str2 = b;
+            this.str1 = a;
+            this.str2 = b;
         }
 
         private string From10To6(string a) //Преобразовывает строку с числом из десятичной системы в шестиричную
