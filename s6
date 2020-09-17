@@ -1,0 +1,100 @@
+using System;
+
+namespace Work
+{
+    class s6
+    {
+        private string str1, str2;
+
+        public s6(string a, string b)
+        {
+            str1 = a;
+            str2 = b;
+        }
+
+        private string From10To6(string a) //Преобразовывает строку с числом из десятичной системы в шестиричную
+        {
+            string str = "";
+            int res = Convert.ToInt32(a);
+            while (res / 6 != 0)
+            {
+                str = str + Convert.ToString(res % 6);
+                res /= 6;
+            }
+            str = str + Convert.ToString(res % 6);
+
+            return StrReverse(str);
+        }
+
+        private string From6To10(string a) //Преобразовывает строку с числом из шестиричной системы в десятичную
+        {
+            string str = StrReverse(a);
+            int res = 0;
+            for (int i = 0; i < str.Length; i++)
+            {
+                res = res + Convert.ToInt32(Convert.ToString(str[i])) * Convert.ToInt32(Math.Pow(6, i));
+            }
+
+            return Convert.ToString(res);
+        }
+
+        private string StrReverse(string a) //Реверсирует (переворачивает) строку 
+        {
+            string res = "";
+            char[] orig = new char[a.Length];
+            for (int i = 0; i < a.Length; i++)
+                orig[i] = a[i];
+            for (int i = a.Length; i != 0; i--)
+                res += orig[i - 1];
+
+            return res;
+        }
+
+        private bool Check() //Проверяет строки на наличие цифр, не входящих в шестиричную систему счисления
+        {
+            if (str1 == "" || str2 == "") return false;
+            if (str1.IndexOf("6") != -1 || str1.IndexOf("7") != -1 || str1.IndexOf("8") != -1 || str1.IndexOf("9") != -1) return false;
+            if (str2.IndexOf("6") != -1 || str2.IndexOf("7") != -1 || str2.IndexOf("8") != -1 || str2.IndexOf("9") != -1) return false;
+            return true;
+        }
+
+        public string Plus()
+        {
+            try
+            {
+                if (Check() == true)
+                {
+                    int a = Convert.ToInt32(From6To10(str1));
+                    int b = Convert.ToInt32(From6To10(str2));
+
+                    return From10To6(Convert.ToString(a + b));
+                }
+                else return "Неверный формат исходных данных";
+            }
+            catch
+            {
+                return "Неверный формат исходных данных";
+            }
+        }
+
+        public string Minus()
+        {
+            try
+            {
+                if (Check() == true)
+                {
+                    int a = Convert.ToInt32(From6To10(str1));
+                    int b = Convert.ToInt32(From6To10(str2));
+
+                    if (a > b) return From10To6(Convert.ToString(a - b));
+                    else return From10To6(Convert.ToString(b - a));
+                }
+                else return "Неверный формат исходных данных";
+            }
+            catch
+            {
+                return "Неверный формат исходных данных";
+            }
+        }
+    }
+}
