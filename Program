@@ -1,0 +1,23 @@
+using System;
+
+namespace Work
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите первое число: ");
+            string a = Console.ReadLine();
+
+            Console.WriteLine("Введите второе число: ");
+            string b = Console.ReadLine();
+
+            s6 s6 = new s6(a, b);
+
+            Console.WriteLine("Результат выполнения метода plus: " + s6.Plus());
+            Console.WriteLine("Результат выполнения метода minus: " + s6.Minus());
+
+            Console.ReadKey();
+        }
+    }
+}
